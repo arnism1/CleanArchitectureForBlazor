@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using CleanArchitectureForBlazor.Domain.Entities;
 
 namespace CleanArchitectureForBlazor.Infrastructure
 {
@@ -15,7 +16,6 @@ namespace CleanArchitectureForBlazor.Infrastructure
             return services;
         }
 
-        //Db Sets later:
     }
 
     // DbContext class should be defined separately
@@ -25,6 +25,13 @@ namespace CleanArchitectureForBlazor.Infrastructure
             : base(options)
         {
         }
+        
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<Studio> Studios { get; set; }
+        public DbSet<Actor> Actors { get; set; }
+        public DbSet<Review> Reviews { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<MovieActor> MovieActors { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
