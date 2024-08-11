@@ -36,7 +36,19 @@ namespace CleanArchitectureForBlazor.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // Configure your model relationships and constraints here
+            // Example of configuring the MovieActor many-to-many relationship
+            modelBuilder.Entity<MovieActor>()
+                .HasKey(ma => new { ma.MovieId, ma.ActorId });
+
+            modelBuilder.Entity<MovieActor>()
+                .HasOne(ma => ma.Movie)
+                .WithMany(m => m.MovieActors)
+                .HasForeignKey(ma => ma.MovieId);
+
+            modelBuilder.Entity<MovieActor>()
+                .HasOne(ma => ma.Actor)
+                .WithMany(a => a.MovieActors)
+                .HasForeignKey(ma => ma.ActorId);
         }
     }
 }
