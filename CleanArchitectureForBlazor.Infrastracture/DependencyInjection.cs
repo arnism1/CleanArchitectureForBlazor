@@ -1,54 +1,25 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using CleanArchitectureForBlazor.Domain.Entities;
 
 namespace CleanArchitectureForBlazor.Infrastructure
 {
     public static class DependencyInjection
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            // Configure DbContext with the connection string
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            // Registering the DbContext
+            services.AddDbContext<ApplicationDbContext>((serviceProvider, options) =>
+            {
+                // Retrieve the configuration from the service provider
+                var configuration = serviceProvider.GetRequiredService<IConfiguration>();
+                var connectionString = configuration.GetConnectionString("DefaultConnection");
+
+                // Configure DbContext with the connection string
+                options.UseSqlServer(connectionString);
+            });
 
             return services;
-        }
-
-    }
-
-    // DbContext class should be defined separately
-    public class ApplicationDbContext : DbContext
-    {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
-        }
-        
-        public DbSet<Movie> Movies { get; set; }
-        public DbSet<Studio> Studios { get; set; }
-        public DbSet<Actor> Actors { get; set; }
-        public DbSet<Review> Reviews { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<MovieActor> MovieActors { get; set; }
-
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-            // Example of configuring the MovieActor many-to-many relationship
-            modelBuilder.Entity<MovieActor>()
-                .HasKey(ma => new { ma.MovieId, ma.ActorId });
-
-            modelBuilder.Entity<MovieActor>()
-                .HasOne(ma => ma.Movie)
-                .WithMany(m => m.MovieActors)
-                .HasForeignKey(ma => ma.MovieId);
-
-            modelBuilder.Entity<MovieActor>()
-                .HasOne(ma => ma.Actor)
-                .WithMany(a => a.MovieActors)
-                .HasForeignKey(ma => ma.ActorId);
         }
     }
 }
