@@ -1,16 +1,11 @@
 ﻿using CleanArchitectureForBlazor.Domain.Entities;
 
-namespace CleanArchitectureForBlazor.Application.Services
+namespace CleanArchitectureForBlazor.Application.Repositories
 {
-    public interface IMovieService
+    public interface IMovieRepository
     {
         Task<IEnumerable<Movie>> GetAllMoviesAsync();
-
         Task<Movie> GetMovieByIdAsync(int id);
-
-        Task<Movie> CreateMovieAsync(Movie movie);
-
-        Task<Movie> UpdateMovieAsync(Movie movie);
-
+        Task<Movie> CreateMovieAsync(Movie newMovie);
     }
 }

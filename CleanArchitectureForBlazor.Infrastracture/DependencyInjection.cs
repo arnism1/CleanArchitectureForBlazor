@@ -1,4 +1,5 @@
-﻿using CleanArchitectureForBlazor.Application.Services;
+﻿using CleanArchitectureForBlazor.Application.Repositories;
+using CleanArchitectureForBlazor.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,7 +21,7 @@ namespace CleanArchitectureForBlazor.Infrastructure
                 options.UseSqlServer(connectionString);
             });
 
-            services.AddScoped<IMovieService, MovieService>();
+            services.AddScoped<IMovieRepository, MovieRepository>();
 
             return services;
         }

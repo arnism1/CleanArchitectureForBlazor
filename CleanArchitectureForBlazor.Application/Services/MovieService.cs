@@ -1,14 +1,15 @@
 ﻿using CleanArchitectureForBlazor.Domain.Entities;
 
-namespace CleanArchitectureForBlazor.Application.Services
+namespace CleanArchitectureForBlazor.Application.Repositories
 {
-    public class MovieService : IMovieService
+    public class MovieService : IMovieRepository
     {
-        private readonly IMovieService _movieRepository;
+        private readonly IMovieRepository _movieRepository;
+
         // Constructor that injects the repository
-        public MovieService(IMovieService movieRepository)
+        public MovieService(IMovieRepository movieRepository)
         {
-            _movieRepository = movieRepository;
+            _movieRepository = movieRepository ?? throw new ArgumentNullException(nameof(movieRepository));
         }
 
         public async Task<IEnumerable<Movie>> GetAllMoviesAsync()
@@ -24,12 +25,6 @@ namespace CleanArchitectureForBlazor.Application.Services
         public async Task<Movie> CreateMovieAsync(Movie newMovie)
         {
             return await _movieRepository.CreateMovieAsync(newMovie);
-        }
-
-        public async Task<Movie> UpdateMovieAsync(Movie updatedMovie)
-        {
-            await _movieRepository.UpdateMovieAsync(updatedMovie);
-            return updatedMovie;
         }
 
 

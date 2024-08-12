@@ -1,6 +1,6 @@
-using CleanArchtitectureForBlazor.WebUI.Server.Components;
 using CleanArchitectureForBlazor.Application;
 using CleanArchitectureForBlazor.Infrastructure;
+using CleanArchtitectureForBlazor.WebUI.Server.Components;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

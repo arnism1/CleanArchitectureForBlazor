@@ -6,7 +6,6 @@ namespace CleanArchitectureForBlazor.Application
     {
         public static IServiceCollection AddApplication(this IServiceCollection services)
         {
-
             return services;
         }
     }
