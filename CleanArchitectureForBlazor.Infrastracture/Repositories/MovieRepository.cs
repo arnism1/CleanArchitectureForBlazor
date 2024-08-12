@@ -18,9 +18,9 @@ namespace CleanArchitectureForBlazor.Infrastructure.Repositories
             return await _context.Movies.ToListAsync();
         }
 
-        public async Task<Movie> GetMovieByIdAsync(int id)
+        public Movie GetMovieById(int id)
         {
-            return await _context.Movies.FindAsync(id);
+            return _context.Movies.Find(id);
         }
 
         public async Task<Movie> CreateMovieAsync(Movie newMovie)

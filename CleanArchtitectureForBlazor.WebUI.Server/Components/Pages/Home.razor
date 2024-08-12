@@ -2,7 +2,7 @@
 @using CleanArchitectureForBlazor.Application.Repositories
 @using CleanArchitectureForBlazor.Domain.Entities
 
-@inject  IMovieRepository movieService;
+@inject IMovieRepository movieService;
 
 <h1>Movie List</h1>
 
@@ -21,13 +21,29 @@ else
     </ul>
 }
 
+@if (singleMovie == null)
+{
+    <p>Loading...</p>
+
+}
+else
+{
+    <p> Single Movie</p>
+    @singleMovie.Title
+    
+    @singleMovie.Genre
+    
+}
+
 @code {
     public List<Movie> movies { get; set; }
     public string test { get; set; }
+    public Movie singleMovie { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         // Await the asynchronous call and assign the result directly to the movies property
         movies = (await movieService.GetAllMoviesAsync()).ToList();
+        singleMovie = movieService.GetMovieById(4);
     }
 }
