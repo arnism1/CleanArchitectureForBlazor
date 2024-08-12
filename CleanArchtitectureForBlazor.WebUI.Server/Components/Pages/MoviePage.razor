@@ -1,0 +1,33 @@
+﻿@page "/Movie/{id:int}"
+@using CleanArchitectureForBlazor.Application.Repositories
+@using CleanArchitectureForBlazor.Domain.Entities
+
+@inject IMovieRepository movieService;
+
+<h1>Movie Page</h1>
+
+@if (movie == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <p> Single Movie</p>
+    <p> Title: @movie.Title</p>
+    <p> Genre: @movie.Genre</p>
+    <p> Director: @movie.Director</p>
+    <p> Studio: @movie.Studio</p>
+}
+
+@code {
+    [Parameter]
+    public int Id { get; set; }
+
+    public Movie movie { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Await the asynchronous call and assign the result directly to the movies property
+        movie = movieService.GetMovieById(Id);
+    }
+}
