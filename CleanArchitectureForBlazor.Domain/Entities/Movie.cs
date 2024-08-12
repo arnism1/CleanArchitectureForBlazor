@@ -16,14 +16,14 @@ namespace CleanArchitectureForBlazor.Domain.Entities
         public string Synopsis { get; set; }
 
         // Navigation properties
-        public int StudioId { get; set; }
+        public int? StudioId { get; set; }
         public Studio Studio { get; set; }
 
         // Relationship with Review
-        public ICollection<Review> Reviews { get; set; }
+        public ICollection<Review>? Reviews { get; set; }
 
         // Relationship with Actor
-        public ICollection<MovieActor> MovieActors { get; set; }
+        public ICollection<MovieActor>? MovieActors { get; set; }
     }
 
 }

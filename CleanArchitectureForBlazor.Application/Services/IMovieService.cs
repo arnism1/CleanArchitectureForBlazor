@@ -6,6 +6,6 @@ namespace CleanArchitectureForBlazor.Application.Repositories
     {
         Task<IEnumerable<Movie>> GetAllMoviesAsync();
         Movie GetMovieById(int id);
-        Task<Movie> CreateMovieAsync(Movie newMovie);
+        Movie CreateMovie(Movie newMovie);
     }
 }

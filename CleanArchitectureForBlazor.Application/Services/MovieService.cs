@@ -22,9 +22,9 @@ namespace CleanArchitectureForBlazor.Application.Repositories
             return  _movieRepository.GetMovieById(id);
         }
 
-        public async Task<Movie> CreateMovieAsync(Movie newMovie)
+        public Movie CreateMovie(Movie newMovie)
         {
-            return await _movieRepository.CreateMovieAsync(newMovie);
+            return  _movieRepository.CreateMovie(newMovie);
         }
 
 

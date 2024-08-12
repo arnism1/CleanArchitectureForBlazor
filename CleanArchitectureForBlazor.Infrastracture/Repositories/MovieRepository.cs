@@ -23,10 +23,10 @@ namespace CleanArchitectureForBlazor.Infrastructure.Repositories
             return _context.Movies.Find(id);
         }
 
-        public async Task<Movie> CreateMovieAsync(Movie newMovie)
+        public  Movie CreateMovie(Movie newMovie)
         {
             _context.Movies.Add(newMovie);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
             return newMovie;
         }
     }
