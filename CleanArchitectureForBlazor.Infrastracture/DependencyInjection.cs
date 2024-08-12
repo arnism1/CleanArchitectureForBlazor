@@ -1,6 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CleanArchitectureForBlazor.Application.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanArchitectureForBlazor.Infrastructure
 {
@@ -18,6 +19,8 @@ namespace CleanArchitectureForBlazor.Infrastructure
                 // Configure DbContext with the connection string
                 options.UseSqlServer(connectionString);
             });
+
+            services.AddScoped<IMovieService, MovieService>();
 
             return services;
         }

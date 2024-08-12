@@ -25,4 +25,8 @@
     <ProjectReference Include="..\CleanArchitectureForBlazor.Application\CleanArchitectureForBlazor.Application.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+
 </Project>
