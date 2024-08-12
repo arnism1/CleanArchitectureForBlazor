@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CleanArchitectureForBlazor.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class initcleancode : Migration
+    public partial class inito : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -67,7 +67,7 @@ namespace CleanArchitectureForBlazor.Infrastructure.Migrations
                     Genre = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ReleaseDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Synopsis = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    StudioId = table.Column<int>(type: "int", nullable: false)
+                    StudioId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -76,8 +76,7 @@ namespace CleanArchitectureForBlazor.Infrastructure.Migrations
                         name: "FK_Movies_Studios_StudioId",
                         column: x => x.StudioId,
                         principalTable: "Studios",
-                        principalColumn: "StudioId",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "StudioId");
                 });
 
             migrationBuilder.CreateTable(
